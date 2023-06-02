@@ -22,7 +22,7 @@ const screenOptions = {
     paddingBottom: 20,
     paddingHorizontal: 16,
     shadowOffset: {width: 0, height: -15},
-    shadowColor: Platform.OS === 'android' ? '#000' : 'rgba(0, 0, 0, 0.05)',
+    shadowColor: Platform.OS === 'android' ? colors.main[100] : colors.main[50],
     shadowOpacity: 24,
     shadowRadius: 24,
     bottom: 0,
