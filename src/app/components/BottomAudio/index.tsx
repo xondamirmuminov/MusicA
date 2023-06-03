@@ -8,9 +8,17 @@ interface IBottomAudioProps {
   track: any;
   pauseHandler: () => {};
   playHandler: () => {};
+  nextHandler: () => {};
+  prevHandler: () => {};
 }
 
-const BottomAudio = ({pauseHandler, playHandler, track}: IBottomAudioProps) => {
+const BottomAudio = ({
+  pauseHandler,
+  playHandler,
+  track,
+  nextHandler,
+  prevHandler,
+}: IBottomAudioProps) => {
   const [isPause, setIsPause] = useState(false);
 
   const handlePause = () => {
@@ -40,13 +48,6 @@ const BottomAudio = ({pauseHandler, playHandler, track}: IBottomAudioProps) => {
             rounded="xl"
             alt={track?.title}
           />
-          {/* <View
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 12,
-              backgroundColor: colors.darkGray[100],
-            }}></View> */}
           <VStack>
             <Text noOfLines={1}>{track?.title}</Text>
             <Text noOfLines={1} fontSize="sm" color="gray.500">
@@ -55,13 +56,15 @@ const BottomAudio = ({pauseHandler, playHandler, track}: IBottomAudioProps) => {
           </VStack>
         </HStack>
         <HStack space="15px">
-          <Icon
-            as={Feather}
-            name="fast-forward"
-            size="lg"
-            color="black.100"
-            style={styles.rotatedIcon}
-          />
+          <Pressable onPress={prevHandler}>
+            <Icon
+              as={Feather}
+              name="fast-forward"
+              size="lg"
+              color="black.100"
+              style={styles.rotatedIcon}
+            />
+          </Pressable>
           <Pressable onPress={handlePause}>
             <Icon
               as={Feather}
@@ -70,7 +73,14 @@ const BottomAudio = ({pauseHandler, playHandler, track}: IBottomAudioProps) => {
               color="black.100"
             />
           </Pressable>
-          <Icon as={Feather} name="fast-forward" size="lg" color="black.100" />
+          <Pressable onPress={nextHandler}>
+            <Icon
+              as={Feather}
+              name="fast-forward"
+              size="lg"
+              color="black.100"
+            />
+          </Pressable>
         </HStack>
       </HStack>
     </View>

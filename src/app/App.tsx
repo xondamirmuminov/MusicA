@@ -14,17 +14,26 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from 'react-native-safe-area-context';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import Loading from './components/Loading';
 
 import ApplicationNavigator from './navigators/Applications';
+import {persistor, store} from './store';
 import {theme} from './theme';
 
 const App = () => {
   return (
-    <NativeBaseProvider theme={theme}>
-      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <ApplicationNavigator />
-      </SafeAreaProvider>
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeBaseProvider theme={theme}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <ApplicationNavigator />
+          </SafeAreaProvider>
+          <Loading />
+        </NativeBaseProvider>
+      </PersistGate>
+    </Provider>
   );
 };
 

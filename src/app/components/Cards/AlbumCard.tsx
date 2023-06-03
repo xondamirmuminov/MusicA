@@ -1,29 +1,25 @@
 import {Image, Pressable, Text} from 'native-base';
 import React from 'react';
 
-interface ITrackCardProps {
-  track: {
+interface IAlbumCardProps {
+  album: {
     id: string;
     title: string;
-    title_short: string;
-    preview: string;
+    cover_medium: string;
     artist: {
       id: string;
       name: string;
-    };
-    album: {
-      cover_medium: string;
     };
   };
   marginRight?: string | number;
   onPress: () => void;
 }
 
-const TrackCard = ({
-  track: {title, title_short, album, artist},
+const AlbumCard = ({
+  album: {title, cover_medium, artist},
   marginRight,
   onPress,
-}: ITrackCardProps) => {
+}: IAlbumCardProps) => {
   return (
     <Pressable
       height="240px"
@@ -33,11 +29,11 @@ const TrackCard = ({
       <Image
         rounded="2xl"
         height="180px"
-        source={{uri: album?.cover_medium}}
+        source={{uri: cover_medium}}
         alt={title}
       />
       <Text marginTop="8px" fontWeight="500" isTruncated noOfLines={1}>
-        {title_short ?? title}
+        {title}
       </Text>
       <Text
         color="gray.500"
@@ -51,4 +47,4 @@ const TrackCard = ({
   );
 };
 
-export default TrackCard;
+export default AlbumCard;
