@@ -1,6 +1,7 @@
 export const colors = {
   main: {
     50: '#2AABEE2b',
+    80: '#2aabeee1',
     100: '#2AABEE',
     600: '#2AABEE',
   },

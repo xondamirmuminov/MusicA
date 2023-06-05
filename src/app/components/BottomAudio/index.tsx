@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 24,
     bottom: 0,
     position: 'absolute',
-    backgroundColor: colors.main[50],
+    backgroundColor: colors.main[80],
+    zIndex: 9999999,
   },
   rotatedIcon: {
     transform: [{rotateY: '180deg'}],

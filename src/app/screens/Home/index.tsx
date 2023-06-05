@@ -8,11 +8,15 @@ import SoundPlayer from 'react-native-sound-player';
 import BottomAudio from '../../components/BottomAudio';
 import ArtistCard from '../../components/Cards/ArtistCard';
 import AlbumCard from '../../components/Cards/AlbumCard';
+import PodcastCard from '../../components/Cards/PodcastCard';
+import PlaylistCard from '../../components/Cards/PlaylistCard';
 
 const Home = () => {
   const [tracks, setTracks] = useState<any>([]);
   const [artists, setArtists] = useState<any>([]);
   const [albums, setAlbums] = useState<any>([]);
+  const [podcasts, setPodcasts] = useState<any>([]);
+  const [playlists, setPlaylists] = useState<any>([]);
   const [selectedTrack, setSelectedTrack] = useState<any>({});
 
   const getChart = async () => {
@@ -20,6 +24,8 @@ const Home = () => {
     setTracks(data?.tracks?.data);
     setArtists(data?.artists?.data);
     setAlbums(data?.albums?.data);
+    setPodcasts(data?.podcasts?.data);
+    setPlaylists(data?.playlists?.data);
   };
 
   const handlePlayTrack = (item: any) => {
@@ -112,6 +118,14 @@ const Home = () => {
     <AlbumCard key={item?.id} album={item} onPress={() => {}} />
   );
 
+  const renderPodcast = ({item}: any) => (
+    <PodcastCard key={item?.id} podcast={item} onPress={() => {}} />
+  );
+
+  const renderPlaylist = ({item}: any) => (
+    <PlaylistCard key={item?.id} playlist={item} onPress={() => {}} />
+  );
+
   useEffect(() => {
     getChart();
   }, []);
@@ -151,6 +165,30 @@ const Home = () => {
             <FlatList
               renderItem={renderAlbum}
               data={albums}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.list}
+            />
+          </VStack>
+          <VStack>
+            <Text fontSize="2xl" fontWeight="500">
+              Top Playlists
+            </Text>
+            <FlatList
+              renderItem={renderPlaylist}
+              data={playlists}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.list}
+            />
+          </VStack>
+          <VStack>
+            <Text fontSize="2xl" fontWeight="500">
+              Top Podcasts
+            </Text>
+            <FlatList
+              renderItem={renderPodcast}
+              data={podcasts}
               horizontal
               showsHorizontalScrollIndicator={false}
               style={styles.list}
